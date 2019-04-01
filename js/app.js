@@ -55,7 +55,6 @@ var location5 = {
     addRandomCustomers(location5, i);
   }
 
-
 // helper function to add number of customers to array, calls function to add to cookies per hour array
 function addRandomCustomers (location, i) {
   var number = location.customersPerHour[i] = getRandomIntInclusive(location.minimum, location.maximum);
@@ -75,18 +74,7 @@ function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }
 
-// put all objects into array
-var locationArray = [location1, location2, location3, location4, location5];
-
 // let's display our number of customers per location!
-var hidden = document.getElementById('hidden');
-
-/*function loopThroughList() {
-  for (let i = 1; i <= 5; i++) {
-    var singleLocation = 'location' + i;
-    returnList(singleLocation);
-  }
-}*/
 
 returnList(location1);
 returnList(location2);
