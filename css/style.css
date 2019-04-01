@@ -1,0 +1,51 @@
+.red {
+  color: darkred;
+  font-style: italic;
+}
+
+.green {
+  color: darkgreen;
+  font-weight: bold; 
+}
+
+.result {
+  font-family: 'Germania One', cursive;
+  color: navy;
+  font-size: 18px;
+}
+
+.unknown {
+  color: darkblue;
+  text-decoration: underline;
+}
+
+.lined {
+  text-decoration: underline;
+}
+
+.main {
+  font-size: 50px;
+}
+
+body {
+  margin: 125px 250px;
+  background-color: aliceblue;
+}
+
+h1, h2 {
+  font-family: 'Germania One', cursive;
+}
+
+h3 {
+  font-style: italic;
+}
+
+ul, h3, div, ol, p {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+  color: rgb(17, 4, 34);
+}
+
+footer {
+  font-family: 'Cedarville Cursive', cursive;
+}
