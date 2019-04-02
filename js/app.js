@@ -7,7 +7,8 @@ var location1 = {
   maximum: 65,
   averageCookies: 6.3,
   customersPerHour: [],
-  cookiesSoldHourly: []
+  cookiesSoldHourly: [],
+  totalCookies: 0
 };
 
 var location2 = {
@@ -16,7 +17,8 @@ var location2 = {
   maximum: 24,
   averageCookies: 1.2,
   customersPerHour: [],
-  cookiesSoldHourly: []
+  cookiesSoldHourly: [],
+  totalCookies: 0
 };
 
 var location3 = {
@@ -25,7 +27,8 @@ var location3 = {
   maximum: 38,
   averageCookies: 3.7,
   customersPerHour: [],
-  cookiesSoldHourly: []
+  cookiesSoldHourly: [],
+  totalCookies: 0
 };
 
 var location4 =  {
@@ -34,7 +37,8 @@ var location4 =  {
   maximum: 38,
   averageCookies: 2.3,
   customersPerHour: [],  
-  cookiesSoldHourly: []
+  cookiesSoldHourly: [],
+  totalCookies: 0
 };
 
 var location5 = {
@@ -43,26 +47,28 @@ var location5 = {
   maximum: 16,
   averageCookies: 6.3,
   customersPerHour: [],
-  cookiesSoldHourly: []
+  cookiesSoldHourly: [],
+  totalCookies: 0
 }
+
 
 //for (let i = 6; i <= 20; i++) {
   for (var i = 0; i < 15; i ++) {
-    addRandomCustomers(location1, i);
-    addRandomCustomers(location2, i);
-    addRandomCustomers(location3, i);
-    addRandomCustomers(location4, i);
-    addRandomCustomers(location5, i);
+    addCustomersAndCookies(location1, i);
+    addCustomersAndCookies(location2, i);
+    addCustomersAndCookies(location3, i);
+    addCustomersAndCookies(location4, i);
+    addCustomersAndCookies(location5, i);
   }
 
 // helper function to add number of customers to array, calls function to add to cookies per hour array
-function addRandomCustomers (location, i) {
+function addCustomersAndCookies (location, i) {
   var number = location.customersPerHour[i] = getRandomIntInclusive(location.minimum, location.maximum);
-  cookiesSold(location, i, number);
+  totalCookiesPerHour(location, i, number);
 }
 
-// helper function that add number of cookies sold per location - dependent on number of customers that hour
-function cookiesSold(location, i, number) {
+// helper function that calculates number of cookies sold per location - dependent on number of customers that hour
+function totalCookiesPerHour(location, i, number) {
   var cookies = location.cookiesSoldHourly[i] = Math.floor(number * location.averageCookies);
   // console.log("cookies at " + location.location + " at hour " + i + " = " + cookies); // testing
 }
@@ -100,6 +106,9 @@ function returnList(singleLocation) {
   text += '</ul></div>';
 
   html.innerHTML += text;
+
+  //save sum
+  singleLocation['totalCookies'] = sum;
 }
 
 // helper function to display time in correct way, with am and pm
