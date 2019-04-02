@@ -89,6 +89,10 @@ returnList(location4);
 returnList(location5);
 
 function returnList(singleLocation) {
+  // var ulEl = document.getElementById();
+  // for loop
+  // var liEl = document.createElement('li');
+  // liEl.textContent = 
   var text = '';
   var html = document.getElementById('hidden');
   var startHour = 6;
