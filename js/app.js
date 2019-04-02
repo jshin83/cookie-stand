@@ -3,6 +3,8 @@
 // array to hold all locations
 var allStores = [];
 var storeHours = [];
+var hourlySums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var tbdy;
 
 // create location object - constructor
 function Store(locationName, minimum, maximum, averageCookies) {
@@ -32,7 +34,84 @@ for (let storeIndex = 0; storeIndex < allStores.length; storeIndex++) {
   for (let i = 0; i < 15; i ++) {
     addCustomersAndCookies(allStores[storeIndex], i);
   }
-  returnList(allStores[storeIndex]);
+  // return lists of all stores and hours with cookies sold per hour
+  // returnList(allStores[storeIndex]);
+}
+
+createTable();
+
+Store.prototype.render = function() {
+  // make table row
+  var trElement = document.createElement('tr');
+  var tdElement = document.createElement('td');
+  // create, content, append - store name
+  tdElement.textContent = this.location;
+  trElement.appendChild(tdElement);
+  // store properties td
+  for(let cookiesIndex = 0 ; cookiesIndex < this.cookiesSoldHourly.length; cookiesIndex++) {
+    var newTd = document.createElement('td');
+
+    console.log('cookies index ' + cookiesIndex);
+    console.log(this.cookiesSoldHourly[cookiesIndex]);
+    console.log('hourly sums array index ' + hourlySums[cookiesIndex]);
+    newTd.textContent = this.cookiesSoldHourly[cookiesIndex];
+    trElement.appendChild(newTd);
+    hourlySums[cookiesIndex] = hourlySums[cookiesIndex] + this.cookiesSoldHourly[cookiesIndex];
+  }
+  // append tr to tbdy
+  tbdy.appendChild(trElement);
+};
+
+// call render on all stores
+for(let i = 0; i < allStores.length; i++) {
+  allStores[i].render();
+}
+
+function createTable() {
+  var div = document.getElementById('hidden');
+  // make a table
+  var table = document.createElement('table');
+  // make table body
+  tbdy = document.createElement('tbody');
+  createTh();
+  //for(let i = 0; i < allStores.length; i++) {
+
+  // TODO: create td for hourSum and append to tr
+  //createTotalsRow(tbdy);
+  table.appendChild(tbdy);
+  div.appendChild(table);
+}
+
+// helper function to create table headers
+function createTh() {
+  var thElement = document.createElement('th');
+  let tdEl = document.createElement('td');
+  tdEl.textContent = '';
+  tbdy.appendChild(thElement.appendChild(tdEl));
+  for (let i = 0; i < storeHours.length; i++) {
+    tdEl = document.createElement('td');
+    tdEl.textContent = storeHours[i];
+    tbdy.appendChild(thElement.appendChild(tdEl));
+  }
+}
+
+// helper function to create totals table tr
+function createTotalsRow() {
+  createTd('Totals');
+  let trElement = document.createElement('tr');
+  for (let i = 0; i < hourlySums.length; i++) {
+    let tdEl = document.createElement('td');
+    tdEl.textContent = hourlySums[i];
+    tbdy.appendChild(trElement.appendChild(tdEl));
+  }
+}
+
+// helper function that creates blank td
+function createTd(content) {
+  var thElement = document.createElement('th');
+  let tdEl = document.createElement('td');
+  tdEl.textContent = content;
+  tbdy.appendChild(thElement.appendChild(tdEl));
 }
 
 // helper function to add number of customers to array, calls function to add to cookies per hour array
@@ -43,23 +122,19 @@ function addCustomersAndCookies (location, i) {
 
 // helper function that calculates number of cookies sold per location - dependent on number of customers that hour
 function totalCookiesPerHour(location, i, number) {
-  location.cookiesSoldHourly[i] = Math.floor(number * location.averageCookies);
+  location.cookiesSoldHourly[i] = Math.ceil(number * location.averageCookies);
   // console.log("cookies at " + location.location + " at hour " + i + " = " + cookies); // testing
 }
 
 // source https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random - generates random number, min and max inclusive
 function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
+// create row of totals and display onto Table
+createTotalsRow();
 
 // let's display our number of customers per location!
-function returnList(singleLocation) {
-  // var ulEl = document.getElementById();
-  // for loop
-  // var liEl = document.createElement('li');
-  // liEl.textContent = 
+/*function returnList(singleLocation) {
   var text = '';
   var html = document.getElementById('hidden');
   var startHour = 6;
@@ -80,15 +155,15 @@ function returnList(singleLocation) {
 
   //save sum
   singleLocation['totalCookies'] = sum;
-}
+}*/
 
 // helper function to display time in correct way, with am and pm
 function processTime(time) {
   if(time > 11 && time !== 12) {
-    return (time - 12) + 'pm';
+    return (time - 12) + ':00pm';
   } else if (time === 12) {
-    return time + 'pm';
+    return time + ':00pm';
   } else {
-    return time + 'am';
+    return time + ':00am';
   }
 }
