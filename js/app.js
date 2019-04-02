@@ -49,17 +49,16 @@ var location5 = {
   customersPerHour: [],
   cookiesSoldHourly: [],
   totalCookies: 0
-}
-
+};
 
 //for (let i = 6; i <= 20; i++) {
-  for (var i = 0; i < 15; i ++) {
-    addCustomersAndCookies(location1, i);
-    addCustomersAndCookies(location2, i);
-    addCustomersAndCookies(location3, i);
-    addCustomersAndCookies(location4, i);
-    addCustomersAndCookies(location5, i);
-  }
+for (var i = 0; i < 15; i ++) {
+  addCustomersAndCookies(location1, i);
+  addCustomersAndCookies(location2, i);
+  addCustomersAndCookies(location3, i);
+  addCustomersAndCookies(location4, i);
+  addCustomersAndCookies(location5, i);
+}
 
 // helper function to add number of customers to array, calls function to add to cookies per hour array
 function addCustomersAndCookies (location, i) {
@@ -69,7 +68,7 @@ function addCustomersAndCookies (location, i) {
 
 // helper function that calculates number of cookies sold per location - dependent on number of customers that hour
 function totalCookiesPerHour(location, i, number) {
-  var cookies = location.cookiesSoldHourly[i] = Math.floor(number * location.averageCookies);
+  location.cookiesSoldHourly[i] = Math.floor(number * location.averageCookies);
   // console.log("cookies at " + location.location + " at hour " + i + " = " + cookies); // testing
 }
 
