@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script|Noto+Sans|Roboto+Slab');
+
+.red {
+  color: darkred;
+  font-style: italic;
+}
+
+.highlights {
+  color: rgb(7, 63, 7);
+  font-weight: bold; 
+  font-family: 'Noto Sans', 'Roboto Slab', serif;
+}
+
+.data {
+  font-family: Arial, Helvetica, Verdana;
+  color: rgb(60, 8, 102);
+  font-size: 18px;
+}
+
+.text {
+  color: darkblue;
+  font-display: Georgia, Times;
+}
+
+.lined {
+  text-decoration: underline;
+}
+
+.main {
+  font-size: 50px;
+}
+
+body {
+  margin: 125px 250px;
+  background-color: aliceblue;
+}
+
+h1 {
+  font-family: 'Germania One', cursive;
+}
+
+h2 {
+  font-family: 'Dancing Script', cursive;
+}
+
+h3 {
+  font-style: italic;
+}
+
+ul, h3, div, ol, p {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+  color: rgb(17, 4, 34);
+}
+
+footer {
+  font-family: 'Cedarville Cursive', cursive;
+}
