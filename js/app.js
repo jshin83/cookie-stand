@@ -1,63 +1,38 @@
 'use strict';
 
-// create these five locations, redundantly, as object literals
-var location1 = {
-  location: '1st and Pike',
-  minimum: 23,
-  maximum: 65,
-  averageCookies: 6.3,
-  customersPerHour: [],
-  cookiesSoldHourly: [],
-  totalCookies: 0
-};
+// array to hold all locations
+var allStores = [];
+var storeHours = [];
 
-var location2 = {
-  location: 'SeaTac Airport',
-  minimum: 3,
-  maximum: 24,
-  averageCookies: 1.2,
-  customersPerHour: [],
-  cookiesSoldHourly: [],
-  totalCookies: 0
-};
+// create location object - constructor
+function Store(locationName, minimum, maximum, averageCookies) {
+  this.location = locationName;
+  this.minimum = minimum;
+  this.maximum = maximum;
+  this.averageCookies = averageCookies;
+  this.customersPerHour = [];
+  this.cookiesSoldHourly = [];
+  this.totalCookies = 0;
+  allStores.push(this);
+}
 
-var location3 = {
-  location: 'Seattle Center',
-  minimum: 11,
-  maximum: 38,
-  averageCookies: 3.7,
-  customersPerHour: [],
-  cookiesSoldHourly: [],
-  totalCookies: 0
-};
+// create location instances
+new Store('1st and Pike', 23, 65, 6.3);
+new Store ('SeaTac Airport', 3, 24, 1.2);
+new Store('Seattle Center', 11, 38, 2.3);
+new Store('Capitol Hill', 20, 38, 2.3);
+new Store('Alki', 2, 16, 6.3);
 
-var location4 =  {
-  location: 'Capitol Hill',
-  minimum: 20,
-  maximum: 38,
-  averageCookies: 2.3,
-  customersPerHour: [],  
-  cookiesSoldHourly: [],
-  totalCookies: 0
-};
+// populate store hours array
+for (let i = 6; i <= 20; i ++) {
+  storeHours.push(processTime(i));
+}
 
-var location5 = {
-  location: 'Alki',
-  minimum: 2,
-  maximum: 16,
-  averageCookies: 6.3,
-  customersPerHour: [],
-  cookiesSoldHourly: [],
-  totalCookies: 0
-};
-
-//for (let i = 6; i <= 20; i++) {
-for (var i = 0; i < 15; i ++) {
-  addCustomersAndCookies(location1, i);
-  addCustomersAndCookies(location2, i);
-  addCustomersAndCookies(location3, i);
-  addCustomersAndCookies(location4, i);
-  addCustomersAndCookies(location5, i);
+for (let storeIndex = 0; storeIndex < allStores.length; storeIndex++) {
+  for (let i = 0; i < 15; i ++) {
+    addCustomersAndCookies(allStores[storeIndex], i);
+  }
+  returnList(allStores[storeIndex]);
 }
 
 // helper function to add number of customers to array, calls function to add to cookies per hour array
@@ -80,13 +55,6 @@ function getRandomIntInclusive(min, max) {
 }
 
 // let's display our number of customers per location!
-
-returnList(location1);
-returnList(location2);
-returnList(location3);
-returnList(location4);
-returnList(location5);
-
 function returnList(singleLocation) {
   // var ulEl = document.getElementById();
   // for loop
@@ -96,13 +64,13 @@ function returnList(singleLocation) {
   var html = document.getElementById('hidden');
   var startHour = 6;
   var sum = 0;
-  
+
   text += '<div><h3>' + singleLocation.location + '</h3><ul>';
 
   // append li for hours and cookies sold by that hour
   for (let i = 0; i < singleLocation['cookiesSoldHourly'].length; i ++) {
     sum += singleLocation['cookiesSoldHourly'][i];
-    text += '<li> ' + processTime(startHour) + ': ' +  singleLocation['cookiesSoldHourly'][i] + ' cookies</li>';
+    text += '<li> ' + processTime(startHour) + ': ' + singleLocation['cookiesSoldHourly'][i] + ' cookies</li>';
     startHour++;
   }
   text += '<li>' + 'Total: ' + sum + ' cookies</li>';
