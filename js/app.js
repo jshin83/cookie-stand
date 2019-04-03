@@ -20,30 +20,17 @@ function Store(locationName, minimum, maximum, averageCookies) {
   allStores.push(this);
 }
 
-// create location instances
-new Store('1st and Pike', 23, 65, 6.3);
-new Store ('SeaTac Airport', 3, 24, 1.2);
-new Store('Seattle Center', 11, 38, 2.3);
-new Store('Capitol Hill', 20, 38, 2.3);
-new Store('Alki', 2, 16, 6.3);
-
-// populate store hours array
-for (let i = 6; i <= 20; i ++) {
-  storeHours.push(processTime(i));
-}
-
-// populate customersPerHour and cookiesSoldHourly arrays, total cookies property for object
-for (let storeIndex = 0; storeIndex < allStores.length; storeIndex++) {
-  // initialize sum to zero, or reset to zero for store object
-  storeCookieSum = 0;
-  for (let i = 0; i < 15; i ++) {
-    addCustomersAndCookies(allStores[storeIndex], i);
+// function that capitalizes first letter of each word - adapted from w3resource
+Store.prototype.capitalizeFirstLetter = function() {
+  this.location = this.location.toLowerCase();
+  this.location = this.location.split(' ');
+  for(var i = 0; i < this.location.length; i++){
+    this.location[i] = this.location[i].charAt(0).toUpperCase() + this.location[i].slice(1);
   }
-  // populate totalCookies for object
-  allStores[storeIndex].totalCookies = storeCookieSum;
-  totalCookieSum += storeCookieSum;
-}
+  return this.location.join(' ');
+};
 
+// adds object information to table
 Store.prototype.render = function() {
   // make table row
   var trElement = document.createElement('tr');
@@ -65,14 +52,12 @@ Store.prototype.render = function() {
   tbdy.appendChild(trElement);
 };
 
-// wrapper function
-displayData();
-
 // creates table, calls render for each object in store array
 function displayData() {
   createTable();
   // call render on all stores
   for(let i = 0; i < allStores.length; i++) {
+    //allStores[i].capitalizeFirstLetter();
     allStores[i].render();
   }
   // create row of totals and display onto Table
@@ -153,3 +138,30 @@ function processTime(time) {
     return time + ':00am';
   }
 }
+
+// create location instances
+new Store('1st and Pike', 23, 65, 6.3);
+new Store ('SeaTac Airport', 3, 24, 1.2);
+new Store('Seattle Center', 11, 38, 2.3);
+new Store('Capitol Hill', 20, 38, 2.3);
+new Store('Alki', 2, 16, 6.3);
+
+// populate store hours array
+for (let i = 6; i <= 20; i ++) {
+  storeHours.push(processTime(i));
+}
+
+// populate customersPerHour and cookiesSoldHourly arrays, total cookies property for object
+for (let storeIndex = 0; storeIndex < allStores.length; storeIndex++) {
+  // initialize sum to zero, or reset to zero for store object
+  storeCookieSum = 0;
+  for (let i = 0; i < 15; i ++) {
+    addCustomersAndCookies(allStores[storeIndex], i);
+  }
+  // populate totalCookies for object
+  allStores[storeIndex].totalCookies = storeCookieSum;
+  totalCookieSum += storeCookieSum;
+}
+
+// wrapper function to render table onto page
+displayData();

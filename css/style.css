@@ -47,7 +47,16 @@ h3 {
   font-style: italic;
 }
 
-ul, h3, div, ol, p {
+input {
+  padding: 5px;
+  width: 190px;
+}
+
+label {
+  margin: 5px;
+}
+
+ul, h3, div, ol, p, fieldset {
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
   color: rgb(17, 4, 34);
@@ -55,6 +64,7 @@ ul, h3, div, ol, p {
 
 table, th, td {
   border: 1px dashed black;
+  margin: 25px;
 }
 
 th, td {

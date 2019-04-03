@@ -3,24 +3,34 @@
 <html>
   <head>
     <title>Salmon Cookies</title>
-    <link href="https://fonts.googleapis.com/css?family=Germania+One|PT+Sans|Cedarville+Cursive" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link href = "https://fonts.googleapis.com/css?family=Germania+One|PT+Sans|Cedarville+Cursive" rel = "stylesheet">
+    <link rel = "stylesheet" type = "text/css" href = "./css/style.css">
   </head>
   <body>
+    <header>
+      <h1 class = "main">Sales of Salmon Cookies</h1>
+    </header>
     <main>
-      <header>
-        <h1 class = 'main'>Sales of Salmon Cookies</h1>
-      </header>
+      <fieldset>
+        <legend>Input New Store</legend>
+        <label for = "location">Location: </label>
+        <input name = "location" type = "text" placeholder = "alki" required>
 
+        <label for = "minimum">Minimum: </label>
+        <input name = "minimum" type = "text" placeholder = "3" required>
 
-      <div id = 'hidden'>
+        <label for = "location">Maximum: </label>
+        <input name = "maximum" type = "text" placeholder = "17" required>
 
+        <label for = "averageCookies">Average Cookies Sold: </label>
+        <input name = "averageCookies" type = "text" placeholder = "7.3" required>
+      </fieldset>
+
+      <div id = "hidden">
       </div>
-
-
     </main>
     <footer>
     </footer>
-    <script src="./js/app.js"></script>
+    <script src = "./js/app.js"></script>
   </body>
 </html>
