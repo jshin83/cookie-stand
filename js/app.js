@@ -30,15 +30,12 @@ for (let i = 6; i <= 20; i ++) {
   storeHours.push(processTime(i));
 }
 
+// populate customersPerHour and cookiesSoldHourly arrays
 for (let storeIndex = 0; storeIndex < allStores.length; storeIndex++) {
   for (let i = 0; i < 15; i ++) {
     addCustomersAndCookies(allStores[storeIndex], i);
   }
-  // return lists of all stores and hours with cookies sold per hour
-  // returnList(allStores[storeIndex]);
 }
-
-createTable();
 
 Store.prototype.render = function() {
   // make table row
@@ -47,37 +44,40 @@ Store.prototype.render = function() {
   // create, content, append - store name
   tdElement.textContent = this.location;
   trElement.appendChild(tdElement);
-  // store properties td
+  // store properties td and append to tr
   for(let cookiesIndex = 0 ; cookiesIndex < this.cookiesSoldHourly.length; cookiesIndex++) {
-    var newTd = document.createElement('td');
-
-    console.log('cookies index ' + cookiesIndex);
-    console.log(this.cookiesSoldHourly[cookiesIndex]);
-    console.log('hourly sums array index ' + hourlySums[cookiesIndex]);
-    newTd.textContent = this.cookiesSoldHourly[cookiesIndex];
-    trElement.appendChild(newTd);
+    tdElement = document.createElement('td');
+    tdElement.textContent = this.cookiesSoldHourly[cookiesIndex];
+    trElement.appendChild(tdElement);
     hourlySums[cookiesIndex] = hourlySums[cookiesIndex] + this.cookiesSoldHourly[cookiesIndex];
   }
   // append tr to tbdy
   tbdy.appendChild(trElement);
 };
 
-// call render on all stores
-for(let i = 0; i < allStores.length; i++) {
-  allStores[i].render();
+// wrapper function
+displayData();
+
+function displayData() {
+  createTable();
+
+  // call render on all stores
+  for(let i = 0; i < allStores.length; i++) {
+    allStores[i].render();
+  }
+  // create row of totals and display onto Table
+  createTotalsRow();
 }
 
+// create table element, assign table body
 function createTable() {
   var div = document.getElementById('hidden');
   // make a table
   var table = document.createElement('table');
   // make table body
   tbdy = document.createElement('tbody');
+  // create table headers
   createTh();
-  //for(let i = 0; i < allStores.length; i++) {
-
-  // TODO: create td for hourSum and append to tr
-  //createTotalsRow(tbdy);
   table.appendChild(tbdy);
   div.appendChild(table);
 }
@@ -130,36 +130,10 @@ function totalCookiesPerHour(location, i, number) {
 function getRandomIntInclusive(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
 }
-// create row of totals and display onto Table
-createTotalsRow();
-
-// let's display our number of customers per location!
-/*function returnList(singleLocation) {
-  var text = '';
-  var html = document.getElementById('hidden');
-  var startHour = 6;
-  var sum = 0;
-
-  text += '<div><h3>' + singleLocation.location + '</h3><ul>';
-
-  // append li for hours and cookies sold by that hour
-  for (let i = 0; i < singleLocation['cookiesSoldHourly'].length; i ++) {
-    sum += singleLocation['cookiesSoldHourly'][i];
-    text += '<li> ' + processTime(startHour) + ': ' + singleLocation['cookiesSoldHourly'][i] + ' cookies</li>';
-    startHour++;
-  }
-  text += '<li>' + 'Total: ' + sum + ' cookies</li>';
-  text += '</ul></div>';
-
-  html.innerHTML += text;
-
-  //save sum
-  singleLocation['totalCookies'] = sum;
-}*/
 
 // helper function to display time in correct way, with am and pm
 function processTime(time) {
-  if(time > 11 && time !== 12) {
+  if (time > 11 && time !== 12) {
     return (time - 12) + ':00pm';
   } else if (time === 12) {
     return time + ':00pm';

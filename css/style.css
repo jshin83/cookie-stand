@@ -31,7 +31,7 @@
 }
 
 body {
-  margin: 125px 250px;
+  margin: 125px 160px;
   background-color: aliceblue;
 }
 
@@ -51,6 +51,14 @@ ul, h3, div, ol, p {
   font-family: 'PT Sans', sans-serif;
   font-size: 16px;
   color: rgb(17, 4, 34);
+}
+
+table, th, td {
+  border: 1px dashed black;
+}
+
+th, td {
+  padding: 5px 7px;
 }
 
 footer {
