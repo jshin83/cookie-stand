@@ -20,6 +20,8 @@
 .text {
   color: darkblue;
   font-display: Georgia, Times;
+  margin: 0 auto;
+  font-size: 25px;
 }
 
 .lined {
@@ -28,15 +30,26 @@
 
 .main {
   font-size: 50px;
+  margin: 0 50px;
+}
+
+.bold {
+  font-weight: 700;
 }
 
 body {
-  margin: 125px 5%;
+  display: block;
+  margin: 85px auto 0 auto;
   background-color: aliceblue;
+}
+
+fieldset {
+  margin: 20px 50px;
 }
 
 h1 {
   font-family: 'Germania One', cursive;
+  font-size: 30px;
 }
 
 h2 {
@@ -46,6 +59,7 @@ h2 {
 h3 {
   font-style: italic;
 }
+
 button {
   margin: 15px 40%;
   width: 250px;
@@ -74,7 +88,7 @@ ul, h3, div, ol, p, fieldset, button {
 
 table, th, td {
   border: 1px dashed black;
-  margin: 25px;
+  margin: 25px auto;
 }
 
 th, td {
@@ -83,4 +97,31 @@ th, td {
 
 footer {
   font-family: 'Cedarville Cursive', cursive;
+}
+
+nav {
+  text-align: center;
+}
+
+nav img {
+  width: 25%;
+}
+
+li {
+  list-style-type: none;
+}
+
+section {
+  margin: 0 200px;
+}
+
+.contact {
+  margin: 0; 
+}
+
+footer {
+  background-color: rgb(12, 12, 41);
+  color: rgb(165, 226, 228);
+  text-align: center;
+  padding: 40px;
 }
