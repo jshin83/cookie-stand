@@ -154,9 +154,9 @@ newStoreForm.addEventListener('submit', addNewStore);
 function addNewStore(event){
   event.preventDefault();
   let locationName = event.target.location.value;
-  let minimumInput = event.target.minimum.value;
-  let maximumInput = event.target.maximum.value;
-  let averageCookiesInput = event.target.averageCookies.value;
+  let minimumInput = Number(event.target.minimum.value);
+  let maximumInput = Number(event.target.maximum.value);
+  let averageCookiesInput = Number(event.target.averageCookies.value);
   // some validation
   if(minimumInput > maximumInput) {
     alert('Maximum input should be more than minimum.');
