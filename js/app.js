@@ -2,11 +2,12 @@
 
 var allStores = [];
 var storeHours = [];
-var hourlySums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var hourlySums;
 var storeCookieSum;
 var tbdy;
 var trElement;
 var totalCookieSum = 0;
+var newStoreForm = document.getElementById('new-store');
 
 // create location object - constructor
 function Store(locationName, minimum, maximum, averageCookies) {
@@ -67,6 +68,7 @@ function displayData() {
 // create table element, assign table body
 function createTable() {
   var div = document.getElementById('hidden');
+  div.innerHTML = '';
   // make a table
   var table = document.createElement('table');
   // make table body
@@ -146,22 +148,50 @@ new Store('Seattle Center', 11, 38, 2.3);
 new Store('Capitol Hill', 20, 38, 2.3);
 new Store('Alki', 2, 16, 6.3);
 
+// attach event listener
+newStoreForm.addEventListener('submit', addNewStore);
+// when submit button is called, handle from input fields
+function addNewStore(event){
+  event.preventDefault();
+  let locationName = event.target.location.value;
+  let minimumInput = event.target.minimum.value;
+  let maximumInput = event.target.maximum.value;
+  let averageCookiesInput = event.target.averageCookies.value;
+  // some validation
+  if(minimumInput > maximumInput) {
+    alert('Maximum input should be more than minimum.');
+  } else {
+    let storeToAdd = new Store(locationName, minimumInput, maximumInput, averageCookiesInput);
+
+    storeToAdd.render();
+    populateObject();
+
+    displayData();
+  }
+  console.log(locationName + ', ' + maximumInput + ', ' + minimumInput + ', ' + averageCookiesInput);
+}
+
 // populate store hours array
 for (let i = 6; i <= 20; i ++) {
   storeHours.push(processTime(i));
 }
 
-// populate customersPerHour and cookiesSoldHourly arrays, total cookies property for object
-for (let storeIndex = 0; storeIndex < allStores.length; storeIndex++) {
-  // initialize sum to zero, or reset to zero for store object
-  storeCookieSum = 0;
-  for (let i = 0; i < 15; i ++) {
-    addCustomersAndCookies(allStores[storeIndex], i);
+function populateObject() {
+  hourlySums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  // populate customersPerHour and cookiesSoldHourly arrays, total cookies property for object
+  for (let storeIndex = 0; storeIndex < allStores.length; storeIndex++) {
+    // initialize sum to zero, or reset to zero for store object
+    storeCookieSum = 0;
+    for (let i = 0; i < 15; i ++) {
+      addCustomersAndCookies(allStores[storeIndex], i);
+    }
+    // populate totalCookies for object
+    allStores[storeIndex].totalCookies = storeCookieSum;
+    totalCookieSum += storeCookieSum;
   }
-  // populate totalCookies for object
-  allStores[storeIndex].totalCookies = storeCookieSum;
-  totalCookieSum += storeCookieSum;
 }
 
+populateObject();
 // wrapper function to render table onto page
 displayData();
