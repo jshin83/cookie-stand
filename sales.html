@@ -7,17 +7,30 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
   </head>
   <body>
+    <header>
+      <h1 class="main">Sales of Salmon Cookies</h1>
+    </header>
     <main>
-      <header>
-        <h1 class = 'main'>Sales of Salmon Cookies</h1>
-      </header>
-
-
-      <div id = 'hidden'>
-
+      <form id="new-store">
+        <fieldset>
+          <legend>Input New Store</legend>
+          <label for="location">Location: </label>
+          <input name="location" type="text" required />
+  
+          <label for="minimum">Minimum: </label>
+          <input name="minimum" type="number" min="0" required/>
+  
+          <label for="maximum">Maximum: </label>
+          <input name="maximum" type="number" min="0" required />
+  
+          <label for="averageCookies">Average Cookies Sold: </label>
+          <input name="averageCookies" type="number" step=".01" min="0" required />
+  
+          <button id="submit">Submit New Location</button>
+        </fieldset>
+      </form>
+      <div id="hidden">
       </div>
-
-
     </main>
     <footer>
     </footer>
