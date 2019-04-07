@@ -50,7 +50,7 @@ body {
   background-color: aliceblue;
   background-image: url("../images/salmon.png");
   background-repeat: no-repeat;
-  background-position: 900px 450px;
+  background-position: 900px 620px;
   background-attachment: fixed;
   background-size: 300px;
   /*background-blend-mode: luminosity;*/
@@ -58,6 +58,8 @@ body {
 
 fieldset {
   margin: 20px 50px;
+  border: 1px solid navy;
+  padding: 25px;
 }
 
 h1 {

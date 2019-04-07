@@ -2,12 +2,13 @@
 
 var allStores = [];
 var storeHours = [];
-var hourlySums;
-var storeCookieSum;
+var storeCookieSum = 0;
 var tbdy;
 var trElement;
 var totalCookieSum = 0;
 var newStoreForm = document.getElementById('new-store');
+var hourlySums = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 
 // create location object - constructor
 function Store(locationName, minimum, maximum, averageCookies) {
@@ -20,16 +21,6 @@ function Store(locationName, minimum, maximum, averageCookies) {
   this.totalCookies = 0;
   allStores.push(this);
 }
-
-// function that capitalizes first letter of each word - adapted from w3resource
-Store.prototype.capitalizeFirstLetter = function() {
-  this.location = this.location.toLowerCase();
-  this.location = this.location.split(' ');
-  for(var i = 0; i < this.location.length; i++){
-    this.location[i] = this.location[i].charAt(0).toUpperCase() + this.location[i].slice(1);
-  }
-  return this.location.join(' ');
-};
 
 // adds object information to table
 Store.prototype.render = function() {
@@ -58,7 +49,6 @@ function displayData() {
   createTable();
   // call render on all stores
   for(let i = 0; i < allStores.length; i++) {
-    //allStores[i].capitalizeFirstLetter();
     allStores[i].render();
   }
   // create row of totals and display onto Table
@@ -91,7 +81,6 @@ function createTableHeaderRow() {
 // helper funciton to create table hr
 function createTh(thContent) {
   var thElement = document.createElement('th');
-  //let tdEl = document.createElement('td');
   thElement.textContent = thContent;
   tbdy.appendChild(thElement);
 }
@@ -148,8 +137,9 @@ new Store('Seattle Center', 11, 38, 2.3);
 new Store('Capitol Hill', 20, 38, 2.3);
 new Store('Alki', 2, 16, 6.3);
 
-// attach event listener
+// attach event listener for when form is submitted
 newStoreForm.addEventListener('submit', addNewStore);
+
 // when submit button is called, handle from input fields
 function addNewStore(event){
   event.preventDefault();
@@ -160,7 +150,10 @@ function addNewStore(event){
   // some validation
   if(minimumInput > maximumInput) {
     alert('Maximum input should be more than minimum.');
+  } else if (averageCookiesInput > maximumInput) {
+    alert('Average number of cookies cannot be greater than maxiumum input.');
   } else {
+    totalCookieSum = 0; // have to reset or will continue adding previous total
     let storeToAdd = new Store(locationName, minimumInput, maximumInput, averageCookiesInput);
 
     storeToAdd.render();
@@ -183,11 +176,16 @@ function populateObject() {
   for (let storeIndex = 0; storeIndex < allStores.length; storeIndex++) {
     // initialize sum to zero, or reset to zero for store object
     storeCookieSum = 0;
+    // allStores[storeIndex].totalCookies = 0;
     for (let i = 0; i < 15; i ++) {
+      allStores[storeIndex].totalCookies = 0;
       addCustomersAndCookies(allStores[storeIndex], i);
     }
     // populate totalCookies for object
+    console.log(storeCookieSum + ' is store cookie sum, populate object.');
     allStores[storeIndex].totalCookies = storeCookieSum;
+    console.log(allStores[storeIndex].totalCookies + ' cookies for object ' + allStores[storeIndex]);
+    console.log('store cookie sum ' + storeCookieSum + ', ' + allStores[storeIndex].totalCookies);
     totalCookieSum += storeCookieSum;
   }
 }
